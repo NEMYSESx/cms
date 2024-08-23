@@ -20,9 +20,6 @@ import { useState, useTransition } from "react";
 
 import { newPassword } from "@/actions/new-password";
 import { FormStatus, FormStatusProps } from "../form-status";
-import { isError } from "lodash";
-import { error } from "console";
-
 export const NewPasswordForm = () => {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");

@@ -19,7 +19,6 @@ import { Button } from "../ui/button";
 import { useState, useTransition } from "react";
 import { FormStatus, FormStatusProps } from "../form-status";
 import { reset } from "@/actions/reset";
-import { isError } from "lodash";
 
 export const ResetForm = () => {
   const [errorSuccess, setErrorSuccess] = useState<FormStatusProps>();

@@ -25,3 +25,7 @@ export const NewPasswordSchema = z.object({
     message: "Minimun 6 character required",
   }),
 });
+
+export const formSchema = z.object({
+  name: z.string().min(1),
+});

@@ -1,6 +1,10 @@
 import { Manrope } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import { ModalProvider } from "@/providers/modal-provider";
+import { ToasterProvider } from "@/providers/toat-provider";
+import { SessionProvider } from "next-auth/react";
+import { auth } from "@/auth";
 
 const fontHeading = Manrope({
   subsets: ["latin"],
@@ -14,14 +18,23 @@ const fontBody = Manrope({
   variable: "--font-body",
 });
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const session = await auth();
   return (
-    <html lang="en">
-      <body
-        className={cn("antialiased", fontHeading.variable, fontBody.variable)}
-      >
-        {children}
-      </body>
-    </html>
+    <SessionProvider session={session}>
+      <html lang="en">
+        <body
+          className={cn("antialiased", fontHeading.variable, fontBody.variable)}
+        >
+          <ToasterProvider />
+          <ModalProvider />
+          {children}
+        </body>
+      </html>
+    </SessionProvider>
   );
 }

@@ -38,7 +38,7 @@ const ImageUpload = ({
         {value.map((url) => (
           <div
             key={url}
-            className="relative w-[200px] rounded-md overflow-hidden"
+            className="relative w-[200px] h-[200px] rounded-md overflow-hidden"
           >
             <div className="z-10 absolute top-2 right-2">
               <Button
@@ -49,13 +49,7 @@ const ImageUpload = ({
                 <Trash className="h-4 w-4" />
               </Button>
             </div>
-            <Image
-              height={50}
-              width={50}
-              className="object-cover"
-              alt="Image"
-              src={url}
-            />
+            <Image fill className="object-cover" alt="Image" src={url} />
           </div>
         ))}
       </div>
@@ -72,7 +66,7 @@ const ImageUpload = ({
               disabled={disabled}
             >
               <ImagePlus />
-              Uload an Image
+              Upload an Image
             </Button>
           );
         }}

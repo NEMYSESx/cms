@@ -1,7 +1,7 @@
 "use client";
 
 import { useStoreModal } from "@/hooks/use-store-modal";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const Main = () => {
   const onOpen = useStoreModal((state) => state.onOpen);
@@ -12,7 +12,7 @@ const Main = () => {
       onOpen();
     }
   }, [isOpen, onOpen]);
-  return <div>hii</div>;
+  return null;
 };
 
 export default Main;

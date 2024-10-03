@@ -35,12 +35,12 @@ const StoreSwitcher = ({ className, items = [] }: StoreSwitcherProps) => {
   const params = useParams();
   const router = useRouter();
 
-  const formattteditems = items.map((item) => ({
+  const formateditems = items.map((item) => ({
     label: item.name,
     value: item.id,
   }));
 
-  const currentStore = formattteditems.find(
+  const currentStore = formateditems.find(
     (item) => item.value === params.storId
   );
   const [open, setOpen] = useState(false);
@@ -71,7 +71,7 @@ const StoreSwitcher = ({ className, items = [] }: StoreSwitcherProps) => {
             <CommandInput placeholder="Search store..." />
             <CommandEmpty>No Store found</CommandEmpty>
             <CommandGroup heading="Stores">
-              {formattteditems.map((store) => (
+              {formateditems.map((store) => (
                 <CommandItem
                   key={store.value}
                   onSelect={() => onStoreSelect(store)}

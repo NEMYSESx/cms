@@ -12,6 +12,8 @@ interface ApiAlertProps {
   variant: "public" | "admin";
 }
 
+//The Record utility type is a more concise way to create an object type with specific keys and corresponding value types. It’s particularly useful when you want to map one set of values to another.
+
 const textMap: Record<ApiAlertProps["variant"], string> = {
   public: "Public",
   admin: "Admin",

@@ -21,7 +21,7 @@ const fun = async () => {
 console.log("hvgfdxzvsvxcv", fun);
 
 // console.log("esrgthdyjgsfdsrgthn", url);
-export const publicRoutes = ["/", "/auth/new-verification"];
+export const publicRoutes = ["/", "/auth/new-verification", "/api/(.*)"];
 
 export const authRoutes = [
   "/auth/login",

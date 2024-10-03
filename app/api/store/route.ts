@@ -25,6 +25,3 @@ export async function POST(req: Request, res: Response) {
     return new NextResponse("Internal error", { status: 500 });
   }
 }
-
-
-

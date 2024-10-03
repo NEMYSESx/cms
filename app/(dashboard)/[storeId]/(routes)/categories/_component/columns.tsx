@@ -1,18 +1,24 @@
 "use client";
 
+type BillboardColumn = {
+  id: string;
+  label: string;
+  createdAt: string;
+};
+
 import { ColumnDef } from "@tanstack/react-table";
-import { BillboardColumn, CellAction } from "./cell-action";
+import { CellAction } from "./cell-action";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type CategoryColumn = {
+export type LocalCategoryColumn = {
   id: string;
   name: string;
   billboardLabel: string;
   createdAt: string;
 };
 
-export const columns: ColumnDef<CategoryColumn>[] = [
+export const columns: ColumnDef<LocalCategoryColumn>[] = [
   {
     accessorKey: "name",
     header: "Name",

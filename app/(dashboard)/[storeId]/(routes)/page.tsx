@@ -5,7 +5,7 @@ interface DashBoardProps {
   params: { storeId: string };
 }
 
-const DashBoardPage = async ({ params }: DashBoardProps) => {
+const SizesPage = async ({ params }: DashBoardProps) => {
   const store = await db.store.findFirst({
     where: {
       id: params.storeId,
@@ -14,4 +14,4 @@ const DashBoardPage = async ({ params }: DashBoardProps) => {
   return <div>Active Store: {store?.name}</div>;
 };
 
-export default DashBoardPage;
+export default SizesPage;

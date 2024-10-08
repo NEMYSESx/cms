@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { AlertModel } from "@/components/modals/alert-model";
 import React from "react";
-import { BillboardColumn } from "../../billboards/_component/cell-action";
+import { columns } from "../../billboards/_component/cell-action";
 
 // Define the shape of the data
 export type SizeColumn = {
@@ -28,27 +28,27 @@ export type SizeColumn = {
 };
 
 // Define columns
-export const columns: ColumnDef<SizeColumn>[] = [
-  {
-    accessorKey: "name",
-    header: "Name",
-  },
+// export const columns: ColumnDef<SizeColumn>[] = [
+//   {
+//     accessorKey: "name",
+//     header: "Name",
+//   },
 
-  {
-    accessorKey: "value",
-    header: "Value",
-  },
-  {
-    accessorKey: "createdAt",
-    header: "Date",
-  },
-  {
-    id: "actions",
-    cell: ({ row }) => <CellAction data={row.original} />,
-  },
-];
+//   {
+//     accessorKey: "value",
+//     header: "Value",
+//   },
+//   {
+//     accessorKey: "createdAt",
+//     header: "Date",
+//   },
+//   {
+//     id: "actions",
+//     cell: ({ row }) => <CellAction data={row.original} />,
+//   },
+// ];
 
-// CellAction component
+// // CellAction component
 interface CellActionProps {
   data: SizeColumn;
 }
@@ -61,19 +61,17 @@ export const CellAction = ({ data }: CellActionProps) => {
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
-    toast.success("Billboard id copied to the clipboard");
+    toast.success("Size id copied to the clipboard");
   };
 
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`);
+      await axios.delete(`/api/${params.storeId}/sizes/${data.id}`);
       router.refresh();
-      toast.success("Deleted successfully");
+      toast.success("Size successfully");
     } catch (error) {
-      toast.error(
-        "Make sure you remove all the categories using this billboard"
-      );
+      toast.error("Make sure you remove all the products using this billboard");
     } finally {
       setLoading(false);
       setOpen(false);
@@ -105,9 +103,7 @@ export const CellAction = ({ data }: CellActionProps) => {
             Copy Id
           </DropdownMenuItem>
           <DropdownMenuItem
-            onClick={() =>
-              router.push(`/${params.storeId}/billboards/${data.id}`)
-            }
+            onClick={() => router.push(`/${params.storeId}/sizes/${data.id}`)}
           >
             <Edit className="mr-2 h-4 w-4" />
             Update

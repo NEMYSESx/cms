@@ -4,44 +4,44 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request, //we cannont remove it as paramss  only works as a second argument
-  { params }: { params: { billboardId: string } }
+  { params }: { params: { sizeId: string } }
 ) {
   try {
-    if (!params.billboardId) {
-      return new NextResponse("Billboard is required", { status: 400 });
+    if (!params.sizeId) {
+      return new NextResponse("sizeId is required", { status: 400 });
     }
-    const billboard = await db.billboard.findUnique({
+    const size = await db.size.findUnique({
       where: {
-        id: params.billboardId,
+        id: params.sizeId,
       },
     });
-    return NextResponse.json(billboard);
+    return NextResponse.json(size);
   } catch (error) {
-    console.log("[BILLBOARD_GET]", error);
+    console.log("[SIZE_GET]", error);
     return new NextResponse("Inte4rnal error", { status: 500 });
   }
 }
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { storeId: string; billboardId: string } }
+  { params }: { params: { storeId: string; sizeId: string } }
 ) {
   try {
     const session = await auth();
     const body = await req.json();
-    const { label, imageUrl } = body;
+    const { name, value } = body;
     const userId = session?.user.id;
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 401 });
     }
-    if (!label) {
-      return new NextResponse("label is required", { status: 400 });
+    if (!name) {
+      return new NextResponse("name is required", { status: 400 });
     }
-    if (!imageUrl) {
-      return new NextResponse("imageUrl is required", { status: 400 });
+    if (!value) {
+      return new NextResponse("value is required", { status: 400 });
     }
-    if (!params.billboardId) {
-      return new NextResponse("billboard id is requird", { status: 400 });
+    if (!params.sizeId) {
+      return new NextResponse("size id is requird", { status: 400 });
     }
 
     const storeByUserId = await db.store.findFirst({
@@ -55,25 +55,25 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    const billboard = await db.billboard.updateMany({
+    const size = await db.size.updateMany({
       where: {
-        id: params.billboardId,
+        id: params.sizeId,
       },
       data: {
-        label,
-        imageUrl,
+        name,
+        value,
       },
     });
-    return NextResponse.json(billboard);
+    return NextResponse.json(size);
   } catch (error) {
-    console.log("[BILLBOARD_PATCH]", error);
+    console.log("[SIZE_PATCH]", error);
     return new NextResponse("Inte4rnal error", { status: 500 });
   }
 }
 
 export async function DELETE(
   req: Request, //we cannont remove it as paramss  only works as a second argument
-  { params }: { params: { storeId: string; billboardId: string } }
+  { params }: { params: { storeId: string; sizeId: string } }
 ) {
   try {
     const session = await auth();
@@ -92,18 +92,20 @@ export async function DELETE(
       //someone is trying to update someone else store
       return new NextResponse("Unauthorized", { status: 403 });
     }
-    if (!params.billboardId) {
-      return new NextResponse("BillboardId id is requird", { status: 400 });
+    if (!params.sizeId) {
+      return new NextResponse("SizeId is required id is requird", {
+        status: 400,
+      });
     }
 
-    const billboard = await db.billboard.deleteMany({
+    const size = await db.size.deleteMany({
       where: {
-        id: params.billboardId,
+        id: params.sizeId,
       },
     });
-    return NextResponse.json(billboard);
+    return NextResponse.json(size);
   } catch (error) {
-    console.log("[BILLBOARD_DELETE]", error);
+    console.log("[SIZE_DELETE]", error);
     return new NextResponse("Inte4rnal error", { status: 500 });
   }
 }

@@ -50,11 +50,6 @@ export async function GET(
   { params }: { params: { storeId: string } }
 ) {
   try {
-    const session = await auth();
-    // const id = session?.user.id;
-    // if (!id) return new NextResponse("User ID is missing", { status: 400 });
-    // if (!session) return new NextResponse("Unauthenticated", { status: 401 });
-
     if (!params.storeId) {
       return new NextResponse("Store Id is required", { status: 400 });
     }

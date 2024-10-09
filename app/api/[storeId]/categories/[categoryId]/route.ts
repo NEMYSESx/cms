@@ -55,7 +55,7 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
-    const categories = await db.category.updateMany({
+    const category = await db.category.updateMany({
       where: {
         id: params.categoryId,
       },
@@ -64,7 +64,7 @@ export async function PATCH(
         billboardId,
       },
     });
-    return NextResponse.json(categories);
+    return NextResponse.json(category);
   } catch (error) {
     console.log("[CATEGORY_PATCH]", error);
     return new NextResponse("Inte4rnal error", { status: 500 });
